@@ -1,21 +1,43 @@
 import React from 'react';
 import '../utils/videolist.css';
 
-const VideoCard = ({videoInfo}) => {
-    // console.log(videoInfo);
+const VideoCard = ({ videoInfo }) => {
+  const { snippet, statistics } = videoInfo;
+  const { channelTitle, title, thumbnails } = snippet;
 
-    const {snippet, statistics} = videoInfo;
-    const {channelTitle, title, thumbnails} = snippet
   return (
-    <div className='video-card p-2 m-2 w-72 shadow-lg rounded-xl box-border h-80'>
-          <img className='rounded-xl ' alt="thumbnail" src={thumbnails.medium.url}/> 
-          <ul>
-             <li className='font-bold py-2'>{title}</li>
-             <li>{channelTitle}</li>
-             <li>{Math.floor(statistics.viewCount/100000)}k views</li>
-          </ul>
-    </div>
-  )
-}
+    <div
+      className="
+        video-card 
+        w-full 
+        flex flex-col 
+        overflow-hidden 
+        rounded-xl 
+        shadow-lg 
+      "
+    >
+      {/* Thumbnail with 16:9 aspect ratio */}
+      <div className="relative w-full pb-[56.25%] overflow-hidden rounded-xl">
+        <img
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          alt="thumbnail"
+          src={thumbnails?.medium?.url}
+        />
+      </div>
 
-export default VideoCard
+      {/* Video info */}
+      <div className="p-2">
+        <h3 className="font-bold text-sm line-clamp-2">{title}</h3>
+        <p className="text-gray-600 text-xs">{channelTitle}</p>
+        <p className="text-gray-500 text-xs">
+          {Math.floor(statistics?.viewCount / 100000)}k views
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default VideoCard;
+
+
+

@@ -9,9 +9,7 @@ const VideoDatas = ({vdata,vId}) => {
   const videoId = vId;
   //  console.log(vdata,vId);
 
-   useEffect(()=>{
-      fetchCommentData();
-   },[vId])
+  
 
    const apiURL = YOUTUBE_COMMENTS_API(videoId);
 
@@ -22,6 +20,10 @@ const VideoDatas = ({vdata,vId}) => {
           console.log(data.items);
           setComments(data.items || []);
    }
+   
+   useEffect(()=>{
+    fetchCommentData();
+ },[vId])
    
   return (
     <div className='py-3 z-10 video-head'>

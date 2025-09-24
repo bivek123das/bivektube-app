@@ -1,12 +1,34 @@
-import React from 'react';
-import '../utils/buttonlist.css';
+import React, { memo } from "react";
 
-const Button = ({name}) => {
+const Button = ({ name, active, onClick, darkMode }) => {
   return (
-    <div className='btn-container'>
-             <button className='btn-list px-4 py-2 m-3  shadow-black shadow-2xl rounded-xl '>{name}</button>
-    </div>
-  )
-}
+    <button
+      onClick={onClick}
+      className={`
+        px-4 py-1.5 mr-2 rounded-full text-sm sm:text-base
+        whitespace-nowrap transition-colors duration-200
+        focus:outline-none
+        flex items-center gap-1
+        ${
+          active
+            ? darkMode
+              ? "bg-white text-black"   // dark mode active
+              : "bg-black text-white"   // light mode active
+            : darkMode
+            ? "bg-gray-700 text-white hover:bg-gray-600" // dark mode default
+            : "bg-gray-100 text-gray-800 hover:bg-gray-200" // light mode default
+        }
+      `}
+    >
+      {/* Optional icon example */}
+      {/* {icon && <span>{icon}</span>} */}
+      {name}
+    </button>
+  );
+};
 
-export default Button;
+export default memo(Button);
+
+
+
+

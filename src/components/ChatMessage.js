@@ -13,4 +13,4 @@ const ChatMessage = ({name,message}) => {
   )
 }
 
-export default ChatMessage
+export default ChatMessage;
