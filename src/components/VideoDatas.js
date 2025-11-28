@@ -6,6 +6,7 @@ import '../utils/watchpage.css';
 const VideoDatas = ({vdata,vId}) => {
 
   const [comments,setComments] = useState([]);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const videoId = vId;
   //  console.log(vdata,vId);
 
@@ -29,9 +30,22 @@ const VideoDatas = ({vdata,vId}) => {
     <div className='py-3 z-10 video-head'>
         <h1 className='font-bold'>{vdata?.snippet?.title}</h1>
         <p className='font-semibold'>{vdata?.snippet?.channelTitle}</p>
-        <div className='my-2 px-1 py-2  text-xs shadow-xl rounded-xl'>
+        <div className='my-2 px-1 py-2  text-xs shadow-xl rounded-xl space-y-2'>
             <p>{vdata?.statistics?.viewCount} Views <span> {new Date(vdata?.snippet?.publishedAt).toLocaleDateString()}</span></p>
-            <p>{vdata?.snippet?.description}</p>
+            {vdata?.snippet?.description && (
+              <>
+                <p className={`${isDescriptionExpanded ? '' : 'line-clamp-3'}`}>
+                  {vdata?.snippet?.description}
+                </p>
+                <button
+                  type='button'
+                  className='text-blue-600 font-semibold text-xs'
+                  onClick={() => setIsDescriptionExpanded((prev) => !prev)}
+                >
+                  {isDescriptionExpanded ? 'Show less' : 'Show more'}
+                </button>
+              </>
+            )}
         </div>
         <p className='font-bold'>{vdata?.statistics?.commentCount} Comments</p>
 
@@ -54,4 +68,4 @@ const VideoDatas = ({vdata,vId}) => {
   )
 }
 
-export default VideoDatas
+export default VideoDatas;
