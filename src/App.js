@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createBrowserRouter } from 'react-router-dom';
 import { toggleTheme } from './utils/themeSlice';
 import Error from './components/Error';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import LoadingPage from './components/LoadingPage'; 
 
 // Lazy loaded pages
@@ -16,6 +16,11 @@ const Search = lazy(() => import('./components/Search'));
 function App() {
   const darkMode = useSelector((store) => store.theme.darkMode);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = darkMode ? '#2a3541' : '#ffffff';
+    document.body.style.color = darkMode ? '#ffffff' : '#000000';
+  }, [darkMode]);
 
   const handleToggle = () => {
     dispatch(toggleTheme());

@@ -12,12 +12,15 @@ code {
     monospace;
 }
 /* index.css or globals.css */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Global scrollbars hidden but scrolling preserved */
+* {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;    /* Firefox */
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 

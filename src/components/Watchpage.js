@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { Link, useSearchParams } from "react-router-dom";
@@ -12,14 +12,34 @@ const Watchpage = () => {
   const [videoData, setVideoData] = useState(null);
   const [relatedVideos, setRelatedVideos] = useState([]);
   const videoId = searchParams.get("v");
+  const mainVideoRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  const scrollToMainVideo = () => {
+    if (mainVideoRef.current) {
+      mainVideoRef.current.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "center",
+        inline: "nearest"
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     dispatch(closeMenu());
     fetchVideoData();
     fetchRelatedVideos();
+    scrollToMainVideo();
   }, [videoId]);
+
+  const extractVideoId = (video) => {
+    if (!video) return '';
+    if (typeof video.id === 'string') return video.id;
+    return video.id?.videoId || '';
+  };
 
   const fetchVideoData = async () => {
     try {
@@ -48,7 +68,10 @@ const Watchpage = () => {
   return (
     <div className="flex flex-col lg:flex-row w-full px-2 lg:px-5 py-3 gap-4">
     {/* Main Video Section */}
-    <div className="flex-1 flex flex-col w-full lg:w-2/3 gap-4">
+    <div
+      ref={mainVideoRef}
+      className="flex-1 flex flex-col w-full lg:w-2/3 gap-4 lg:h-[calc(100vh-80px)] lg:overflow-y-auto"
+    >
       <div className="w-full relative" style={{ paddingTop: "56.25%" }}>
         <iframe
           className="absolute top-0 left-0 w-full h-full rounded-xl"
@@ -73,23 +96,29 @@ const Watchpage = () => {
   
       {/* Related videos container adjusts width automatically */}
       <div className="flex flex-col gap-2">
-        {relatedVideos?.slice(0, 20)?.map((video) => (
+        {relatedVideos?.slice(0, 20)?.map((video) => {
+          const relatedId = extractVideoId(video);
+          if (!relatedId) return null;
+          return (
           <Link
-            key={video?.id}
-            to={`/watch?v=${video?.id}`}
-            onClick={() => window.scrollTo(0, 0)}
+            key={relatedId}
+            to={`/watch?v=${relatedId}`}
+            onClick={scrollToMainVideo}
+            className="group block"
           >
-            <div className="flex gap-2 px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl cursor-pointer">
+            <div className="flex gap-2 px-2 py-2 rounded-xl cursor-pointer transition-transform duration-200 ease-out group-hover:scale-[1.02]">
               <img
-                className="rounded-xl w-[168px] h-[94px] object-cover"
+                className="rounded-xl w-[168px] h-[94px] object-cover transition-transform duration-200 ease-out group-hover:scale-105"
                 alt="thumbnail"
                 src={video?.snippet?.thumbnails?.medium?.url}
               />
               <div className="flex flex-col justify-between flex-1">
-                <p className="font-medium text-sm line-clamp-2">
+                <p className="font-medium text-sm line-clamp-2 group-hover:text-blue-600">
                   {video?.snippet?.title}
                 </p>
-                <p className="text-gray-500 text-xs">{video?.snippet?.channelTitle}</p>
+                <p className="text-gray-500 text-xs group-hover:text-gray-700 dark:group-hover:text-gray-300">
+                  {video?.snippet?.channelTitle}
+                </p>
                 <p className="text-gray-500 text-xs">
                   100 views ·{" "}
                   {(
@@ -101,7 +130,8 @@ const Watchpage = () => {
               </div>
             </div>
           </Link>
-        ))}
+        );
+        })}
       </div>
     </div>
   </div>

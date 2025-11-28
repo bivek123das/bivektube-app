@@ -10,10 +10,17 @@ const VideoCard = ({ videoInfo }) => {
       className="
         video-card 
         w-full 
+        h-full
+        min-h-[250px]
         flex flex-col 
         overflow-hidden 
         rounded-xl 
         shadow-lg 
+        transition-transform 
+        duration-200 
+        ease-out 
+        hover:scale-[1.03] 
+        hover:shadow-2xl
       "
     >
       {/* Thumbnail with 16:9 aspect ratio */}

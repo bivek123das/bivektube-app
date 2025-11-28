@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { toggleTheme } from "../utils/themeSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +70,7 @@ const Head = () => {
 
   const toggleMenuHandler = () => dispatch(toggleMenu());
 
-  const handleToggleTheme = () => dispatch({ type: "theme/toggleTheme" });
+  const handleToggleTheme = () => dispatch(toggleTheme());
 
   return (
     <header
@@ -233,7 +234,7 @@ const Head = () => {
         {/* Dark/Light toggle icon */}
         <button
           onClick={handleToggleTheme}
-          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none"
+          className="p-2 rounded-full  focus:outline-none"
         >
           {darkMode ? (
             <i className="fa-regular fa-sun text-lg"></i>
