@@ -1,99 +1,18 @@
-@media screen and (max-width:1085px){
-    .video-card{
-        width: 16rem;
-    }
+.video-card {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
 }
 
-@media screen and (max-width:990px){
-    .video-card{
-        width: 15rem;
-        height: 18rem;
-    }
-    .video-card ul li{
-        font-size: 14px;
-
-    }
+.video-card img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-@media screen and (max-width:940px){
-    .video-card{
-        width: 13rem;
+@media screen and (min-width: 768px) {
+    .video-card {
+        max-width: none;
+        margin: 0;
     }
-    
 }
-
-@media screen and (max-width:840px){
-    .video-card{
-        width: 17rem;
-    }
-    
-}
-
-@media screen and (max-width:750px){
-    .video-card{
-        width: 13rem;
-    }
-    
-}
-
-@media screen and (max-width:680px){
-    .video-card{
-        width: 11rem;
-        margin: 12px;
-    }
-    
-}
-
-@media screen and (max-width:600px){
-    .video-card{
-        width: 14rem;
-        margin: 20px;
-    }
-     
- }
-
- @media screen and (max-width:530px){
-    .video-card{
-        width: 14rem;
-        margin: 10px;
-    }
-     
- }
-
-
- @media screen and (max-width:530px){
-    .video-card{
-        width: 22rem;
-        margin: 0px 28px;
-        margin-top: 15px;
-        height: 20rem;
-    }
-    .video-card img{
-        width: 100%;
-    }
-     
- }
-
- @media screen and (max-width:430px){
-    .video-card{
-        width: 22rem;
-        margin: 15px 32px;
-        height: 20rem;
-    }
-    .video-card img{
-        width: 100%;
-    }
-     
- }
-
- @media screen and (max-width:370px){
-    .video-card{
-        width: 18rem;
-        margin: 10px 25px;
-        height: 20rem;
-    }
-    .video-card img{
-        width: 100%;
-    }
-     
- }
