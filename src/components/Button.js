@@ -1,6 +1,9 @@
 import React, { memo } from "react";
+import { useSelector } from "react-redux";
 
-const Button = ({ name, active, onClick, darkMode }) => {
+const Button = ({ name, active, onClick }) => {
+  const darkMode = useSelector((store) => store.theme.darkMode);
+  
   return (
     <button
       onClick={onClick}
@@ -20,8 +23,6 @@ const Button = ({ name, active, onClick, darkMode }) => {
         }
       `}
     >
-      {/* Optional icon example */}
-      {/* {icon && <span>{icon}</span>} */}
       {name}
     </button>
   );

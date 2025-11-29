@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const ShimmerCard = () => {
+export const ShimmerCard = () => {
   const darkMode = useSelector((store) => store.theme.darkMode);
 
   const baseColor = darkMode ? "#1D232A" : "#E5E5E5";

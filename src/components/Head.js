@@ -144,17 +144,17 @@ const Head = () => {
 
   {/* Desktop suggestions */}
   {showSuggestions && suggestions.length > 0 && (
-    <ul
-      className={`absolute top-full left-0 w-full mt-1 max-h-60 overflow-y-auto shadow-lg rounded-lg z-50 ${
-        darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-      }`}
-    >
+    <ul className={`absolute top-full left-0 w-full mt-1 max-h-60 overflow-y-auto shadow-lg rounded-lg z-50 ${ darkMode ? "bg-gray-800 text-white" : "bg-white text-black" }`} >
       {suggestions.map((suggestion, idx) => (
         <li
           key={idx}
           onMouseDown={handleClickSuggestion}
           onTouchStart={handleTouchStart}
-          className="px-3 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 whitespace-nowrap"
+          className={`px-3 py-2 cursor-pointer whitespace-nowrap ${
+            darkMode
+              ? "hover:bg-[#2a3541]"
+              : "hover:bg-[#E5E5E5]"
+          }`}
         >
           <i className="fa-solid fa-magnifying-glass mr-2"></i>
           {suggestion}
@@ -211,17 +211,17 @@ const Head = () => {
 
           {/* Mobile suggestions */}
           {showSuggestions && suggestions.length > 0 && (
-            <ul
-              className={`mt-2 max-h-60 overflow-y-auto rounded-lg ${
-                darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-              }`}
-            >
+           <ul className={`mt-2 max-h-60 overflow-y-auto rounded-lg ${ darkMode ? "bg-gray-800 text-white" : "bg-white text-black" }`} >
               {suggestions.map((suggestion, idx) => (
                 <li
                   key={idx}
                   onMouseDown={handleClickSuggestion}
                   onTouchStart={handleTouchStart}
-                  className="px-3 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 whitespace-nowrap"
+                  className={`px-3 py-2 cursor-pointer whitespace-nowrap ${
+                    darkMode
+                      ? "hover:bg-[#2a3541]"
+                      : "hover:bg-[#E5E5E5]"
+                  }`}
                 >
                   <i className="fa-solid fa-magnifying-glass mr-2"></i>
                   {suggestion}
@@ -241,11 +241,6 @@ const Head = () => {
           ) : (
             <i className="fa-regular fa-moon text-lg"></i>
           )}
-        </button>
-
-        {/* User icon */}
-        <button className="text-2xl p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
-          <i className="fa-solid fa-user"></i>
         </button>
       </div>
     </header>

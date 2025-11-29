@@ -1,9 +1,14 @@
-@media screen and (max-width:770px){
+@media screen and (max-width:768px){
     .sidebar{
-        width: 25%;
+        width: 200px;
     }
 }
 
+@media screen and (max-width:640px){
+    .sidebar{
+        width: 180px;
+    }
+}
 
 @media screen and (max-width:695px){
     .sidebar{

@@ -1,18 +1,18 @@
 .video-card {
-    width: 100%;
+        width: 100%;
     max-width: 420px;
     margin: 0 auto;
-}
+    }
 
 .video-card img {
-    width: 100%;
+        width: 100%;
     height: auto;
     display: block;
-}
+ }
 
 @media screen and (min-width: 768px) {
     .video-card {
         max-width: none;
         margin: 0;
     }
-}
+ }

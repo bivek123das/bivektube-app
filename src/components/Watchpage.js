@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { Link, useSearchParams } from "react-router-dom";
 import { GOOGLE_API_KEY, YOUTUBE_VIDEOS_API } from "../utils/constants";
@@ -13,6 +13,7 @@ const Watchpage = () => {
   const [relatedVideos, setRelatedVideos] = useState([]);
   const videoId = searchParams.get("v");
   const mainVideoRef = useRef(null);
+  const darkMode = useSelector((store) => store.theme.darkMode);
 
   const dispatch = useDispatch();
 
@@ -113,13 +114,23 @@ const Watchpage = () => {
                 src={video?.snippet?.thumbnails?.medium?.url}
               />
               <div className="flex flex-col justify-between flex-1">
-                <p className="font-medium text-sm line-clamp-2 group-hover:text-blue-600">
+                <p className={`font-medium text-sm line-clamp-2 ${
+                  darkMode 
+                    ? 'text-white group-hover:text-blue-400' 
+                    : 'text-black group-hover:text-blue-600'
+                }`}>
                   {video?.snippet?.title}
                 </p>
-                <p className="text-gray-500 text-xs group-hover:text-gray-700 dark:group-hover:text-gray-300">
+                <p className={`text-xs ${
+                  darkMode 
+                    ? 'text-gray-400 group-hover:text-gray-300' 
+                    : 'text-gray-500 group-hover:text-gray-700'
+                }`}>
                   {video?.snippet?.channelTitle}
                 </p>
-                <p className="text-gray-500 text-xs">
+                <p className={`text-xs ${
+                  darkMode ? 'text-gray-500' : 'text-gray-500'
+                }`}>
                   100 views ·{" "}
                   {(
                     Math.abs(new Date(video?.snippet?.publishedAt) - new Date()) /
